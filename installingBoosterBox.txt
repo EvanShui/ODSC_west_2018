@@ -1,0 +1,7 @@
+install.packages('RCurl')
+install.packages('XML')
+install.packages('triangle')
+setwd("~/HarvardSummerStudent2018/lessons/7_July 25-Finance")
+install.packages("BoosterBox_0.0.2.tar.gz",repos = NULL, type = "source")
+
+library(BoosterBox)
