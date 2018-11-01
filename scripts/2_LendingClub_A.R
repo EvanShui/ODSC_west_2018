@@ -24,40 +24,39 @@ keeps <-c("loan_amnt", "term", "int_rate", "installment", "grade", "sub_grade", 
 
 df <- df[,keeps]
 
+# Partitioning 
+set.seed(1234)
+num <- (nrow(df) %/% 10) * 8
+idx <- sample(1:nrow(df), num)
+
+# Training Subset 
+trainDF      <- df[idx,]
+
 ## Data Prep
 #Make % a numeric
-df$revol_util <- gsub('%', '', df$revol_util) %>%
+trainDF$revol_util <- gsub('%', '', trainDF$revol_util) %>%
                   as.character() %>% 
                   as.numeric()
 
 
-df$int_rate   <- gsub('%', '', df$int_rate)   %>%
+trainDF$int_rate   <- gsub('%', '', trainDF$int_rate)   %>%
                   as.character() %>% 
                   as.numeric()
 
 # Now easy variable treatment plan
-dataPlan <-designTreatmentsC(dframe        = df, 
+dataPlan <-designTreatmentsC(dframe        = trainDF, 
                              varlist       = keeps,
                              outcomename   = 'y', 
                              outcometarget = 1)
 
 # Now apply the plan to the data
-treatedDF <- prepare(dataPlan, df)
+treatedDF <- prepare(dataPlan, trainDF)
 
 ncol(df)
 ncol(treatedDF)
 
 names(df)
 names(treatedDF)
-
-# Partitioning 
-set.seed(1234)
-num <- (nrow(treatedDF) %/% 10) * 8
-idx <- sample(1:nrow(treatedDF), num)
-
-# Train, Validation 
-trainDF      <- treatedDF[idx,]
-validationDF <- treatedDF[-idx,]
 
 # Now let's do a logistic regression with a 10 fold CV
 crtl <- trainControl(method = "cv", 
@@ -66,26 +65,12 @@ crtl <- trainControl(method = "cv",
 
 # Fit lm model using 3-fold CV: model
 fit3 <- train(as.factor(y) ~ ., 
-              data = trainDF,
+              data = treatedDF,
               method="glm", family="binomial",
               trControl = crtl)
 fit3
 preds <- predict(fit3)
 table(preds, trainDF$y)
-
-# what happens when we put in original data?
-newPreds <- predict(fit3, df)
-
-# So let's treat our data
-validationData        <- df[-idx, ]
-validationDataTreated <- prepare(dataPlan, validationData)
-
-ncol(validationData)
-ncol(validationDataTreated)
-
-newPreds <- predict(fit3, validationDataTreated )
-
-table(newPreds, validationDataTreated$y)
 
 # Save the model
 # In R GLM model objects are huge, saving a lot of extra info.  This gets rid of a lot of it but retains the ability to make predictions.
