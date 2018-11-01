@@ -42,7 +42,8 @@ install.packages('triangle')
 install.packages('XML')
 ```
 
-To save time, there is a custom package based on the above four libraries. To do so, use the following code *but change the path to the tar.gz file*
+To save time, there is a custom package based on the above four libraries. To install, use the following code *but change the path to the tar.gz file* on your local computer.
+
 ```
 install.packages("somePath/someFolder/ODSC_west_2018/BoosterBox_0.0.2.tar.gz",
                   repos = NULL, type = "source")
