@@ -67,13 +67,14 @@ browsable(
 )
 
 # Now compound indicators
-HASmacd         <- MACD(Lag(ifelse(HASrsi$rsi < 70 & 
-                                     HASrsi > 30 &  
-                                     HASmacd$macd > HASmacd$signal,1, 0)))
+HASmacd         <- MACD(HAS$HAS.Close,
+                        nFast = 12, nSlow = 26, nSig = 9, 
+                        maType="SMA", #Usually EMA; not covered
+                        percent = T)
 
-HAScompoundRule <- Lag(ifelse(HASrsi$rsi < 70 &
-                         HASmacd$macd > HASmacd$signal,
-                         1, 0))
+HAScompoundRule <- Lag(ifelse(HASrsi$rsi < 70 & 
+                                HASrsi > 30 &  
+                                HASmacd$macd > HASmacd$signal,1, 0))
 
 ret      <- ROC(Cl(HAS)) * HAScompoundRule
 charts.PerformanceSummary(ret)
