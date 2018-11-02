@@ -19,8 +19,8 @@ AMZN <- AMZN['2018-01-01/2018-06-22']
 
 # Calc RSI
 AMZNrsi <-RSI(AMZN$AMZN.Close,
-    maType="SMA", #Usually EMA
-    n =14)
+              maType="SMA", #Usually EMA
+              n =14)
 
 tail(AMZNrsi,10)
 
@@ -55,10 +55,11 @@ browsable(
 )
 
 # Now compound indicators
-HASmacd    <- MACD(HAS$HAS.Close,
-                   nFast = 12, nSlow = 26, nSig = 9, 
-                   maType="SMA", #Usually EMA; not covered
-                   percent = T)
+HASmacd         <- MACD(HAS$HAS.Close,
+                        nFast = 12, nSlow = 26, nSig = 9, 
+                        maType="SMA", #Usually EMA; not covered
+                        percent = T)
+
 HAScompoundRule <- Lag(ifelse(HASrsi$rsi < 70 &
                          HASmacd$macd > HASmacd$signal,
                          1, 0))
