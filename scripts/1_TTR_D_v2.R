@@ -45,15 +45,20 @@ tail(CMGmacd)
 
 # Easier to interpret as a percent
 CMGmacdPer <- MACD(CMG$CMG.Close,
-                nFast = 12, nSlow = 26, nSig = 9, 
-                maType="SMA", #Usually EMA; not covered
-                percent = T)
+                   nFast = 12, nSlow = 26, nSig = 9, 
+                   maType="SMA", #Usually EMA; not covered
+                   percent = T)
 
 # Now let's visualize in a stacked dynamic plot
 browsable(
   tagList(
-    dygraph(CMG$CMG.Close, group = "Price", height = 200, width = "100%"),
-    dygraph(CMGmacdPer,group = "Price", height = 200, width = "100%") %>%
+    dygraph(CMG$CMG.Close, 
+            group = "Price", 
+            height = 200, 
+            width = "100%"),
+    dygraph(CMGmacdPer,group = "Price", 
+            height = 200, 
+            width = "100%") %>%
       dySeries('macd',label='MACD') %>%
       dySeries('signal',label='SIGNAL') %>%
       dyRangeSelector()
