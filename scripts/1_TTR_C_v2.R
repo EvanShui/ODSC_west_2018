@@ -19,7 +19,7 @@ KS <- KS['2018-03-01/2018-06-22']
 KSma10 <- SMA(KS$KS.Close, 10)
 
 # Construct a trading rule
-df <-data.frame(KS$KS.Close,KSma10)
+df          <- data.frame(KS$KS.Close,KSma10)
 df$tradeSig <- Lag(ifelse(df$KS.Close > df$SMA  , 1, 0)) 
 # not discussing short (-1)
 ?Lag
@@ -30,10 +30,10 @@ tail(df,25)
 
 # Now let's do it for a longer backtest
 getSymbols("KS")
-KS <- KS['2018-01-01/']
-KSma10 <-SMA(KS$KS.Close, 10)
+KS          <- KS['2018-01-01/']
+KSma10      <-SMA(KS$KS.Close, 10)
 tradeSignal <- Lag(ifelse(KS$KS.Close > KSma10  , 1, 0))
-ret <- ROC(Cl(KS))*tradeSignal #Rate of Change TTR::ROC()
+ret <- ROC(Cl(KS)) * tradeSignal #Rate of Change TTR::ROC()
 
 
 # Review your return
