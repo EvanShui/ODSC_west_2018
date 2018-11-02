@@ -16,6 +16,7 @@ setwd("C:/Users/Edward/Desktop/odsc blogs/presentation/ODSC_west_2018/workshop_d
 library(BoosterBox)
 
 # Example data formatting
+#http://magic.tcgplayer.com/db/search_result.asp?Set_Name=Guilds%20of%20Ravnica
 data(modernMasters13)
 head(modernMasters13)
 
