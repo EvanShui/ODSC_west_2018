@@ -1,6 +1,6 @@
 #' Author: Ted Kwartler
 #' Date: 6-22-2018
-#' Purpose: Algo Trading Example
+#' Purpose: Gather Stock data and plot example
 #' 
 
 # Opts
