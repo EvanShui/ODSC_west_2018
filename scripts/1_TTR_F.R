@@ -27,8 +27,14 @@ tail(AMZNrsi,10)
 # Visualize 
 browsable(
   tagList(
-    dygraph(AMZN$AMZN.Close, group = "Price", height = 200, width = "100%"),
-    dygraph(AMZNrsi, group = "Price", height = 200, width = "100%") %>%
+    dygraph(AMZN$AMZN.Close, 
+            group = "Price", 
+            height = 200, 
+            width = "100%"),
+    dygraph(AMZNrsi, 
+            group = "Price", 
+            height = 200, 
+            width = "100%") %>%
       dyLimit(30, label = 'OverSold') %>%
       dyLimit(70, label = 'OverBought') %>%
       dyRangeSelector()
@@ -46,8 +52,14 @@ HASrsi <-RSI(HAS$HAS.Close,
 # Visualize 
 browsable(
   tagList(
-    dygraph(HAS$HAS.Close, group = "Price", height = 200, width = "100%"),
-    dygraph(HASrsi, group = "Price", height = 200, width = "100%") %>%
+    dygraph(HAS$HAS.Close, 
+            group = "Price", 
+            height = 200, 
+            width = "100%"),
+    dygraph(HASrsi, 
+            group = "Price", 
+            height = 200, 
+            width = "100%") %>%
       dyLimit(30, label = 'OverSold') %>%
       dyLimit(70, label = 'OverBought') %>%
       dyRangeSelector()
