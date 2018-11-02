@@ -56,7 +56,8 @@ browsable(
             group = "Price", 
             height = 200, 
             width = "100%"),
-    dygraph(CMGmacdPer,group = "Price", 
+    dygraph(CMGmacdPer,
+            group = "Price", 
             height = 200, 
             width = "100%") %>%
       dySeries('macd',label='MACD') %>%
