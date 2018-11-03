@@ -71,7 +71,7 @@ boxSim <- do.call(rbind, boxSim)
 
 # Load to save time.
 #saveRDS(boxSim, 'boxSim.rds')
-indBoxes <- readRDS('boxSim.rds')
+boxSim <- readRDS('boxSim.rds')
 
 # See what verbose=T does
 boxSim[1:10,]
