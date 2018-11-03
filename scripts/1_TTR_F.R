@@ -73,7 +73,7 @@ HASmacd         <- MACD(HAS$HAS.Close,
                         percent = T)
 
 HAScompoundRule <- Lag(ifelse(HASrsi$rsi < 70 & 
-                                HASrsi > 30 &  
+                                HASrsi$rsi > 30 &  
                                 HASmacd$macd > HASmacd$signal,1, 0))
 
 ret      <- ROC(Cl(HAS)) * HAScompoundRule
